@@ -20,7 +20,7 @@ public class DataModel {
     public int getCat() {
         return cat;
     }
-
+    
     /**
      * @param cat the cat to set
      */
