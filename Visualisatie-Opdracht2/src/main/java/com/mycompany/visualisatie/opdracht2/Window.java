@@ -8,7 +8,6 @@ package com.mycompany.visualisatie.opdracht2;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import processing.core.PImage;
@@ -42,18 +41,32 @@ public class Window extends PApplet {
 
     public void draw() {
         drawScatterGraph(position, length, width, "Eig1", "Eig2");
+        System.out.println(mouseX + " : " + mouseY);
 
     }
 
     public void drawScatterGraph(int[] position, int length, int width, String xLabel, String yLabel) {
         line(position[0], position[1], position[0] + width, position[1]);
         line(position[0], position[1], position[0], position[1] - length);
-        
-        fill(0,0,0);
-        
+
+        fill(0, 0, 0);
+
         text(xLabel, position[0] + width + 10, position[1]);
         text(yLabel, position[0], position[1] - length - 10);
+
+        text(0, position[0] - 10, position[1] + 15);
+
+        text(0, position[0] + (0.25f * width), position[1] + 15);
+        text(0, position[0] + (0.50f * width), position[1] + 15);
+        text(0, position[0] + (0.75f * width), position[1] + 15);
+        text(0, position[0] + width, position[1] + 15);
+
+        text(0, position[0] - 15, position[1] - (0.25f * length));
+        text(1000, position[0] - 15, position[1] - (0.5f * length));
+        text(0, position[0] - 15, position[1] - (0.75f * length));
+        text(0, position[0] - 15, position[1] - length);
         
+
         for (DataModel mapData : mappedData) {
 
             point(mapData.getEig1(), mapData.getEig2());
@@ -75,13 +88,11 @@ public class Window extends PApplet {
         float[] minMaxEig2 = getMinMaxFloat(eig2);
 
         ArrayList<DataModel> mapped = new ArrayList();
-        
+
         for (DataModel datas : data) {
             DataModel model = new DataModel();
             int mappedEig1 = (int) map(datas.getEig1(), minMaxEig1[0], minMaxEig1[1], position[0], position[0] + width);
             float mappedEig2 = map(datas.getEig2(), minMaxEig2[0], minMaxEig2[1], position[1], position[1] - length);
-            System.out.println("X: " + mappedEig1);
-            System.out.println("Y: " + mappedEig2);
             model.setEig1(mappedEig1);
             model.setEig2(mappedEig2);
 
@@ -109,7 +120,7 @@ public class Window extends PApplet {
 
         return minMax;
     }
-    
+
     public int[] getMinMaxInteger(ArrayList<Integer> data) {
         int min = data.get(0);
         int max = data.get(0);
@@ -127,4 +138,5 @@ public class Window extends PApplet {
 
         return minMax;
     }
+
 }
