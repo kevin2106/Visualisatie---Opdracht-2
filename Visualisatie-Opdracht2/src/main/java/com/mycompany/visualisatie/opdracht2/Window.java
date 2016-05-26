@@ -23,6 +23,9 @@ public class Window extends PApplet {
     int[] position = {100, 400};
     int width = 300;
     int length = 300;
+    
+    int[] minMaxEig1;
+    float[] minMaxEig2;
     ArrayList<DataModel> mappedData;
     PImage image;
 
@@ -56,14 +59,10 @@ public class Window extends PApplet {
 
         text(0, position[0] - 10, position[1] + 15);
 
-        text(0, position[0] + (0.25f * width), position[1] + 15);
         text(0, position[0] + (0.50f * width), position[1] + 15);
-        text(0, position[0] + (0.75f * width), position[1] + 15);
         text(0, position[0] + width, position[1] + 15);
 
-        text(0, position[0] - 15, position[1] - (0.25f * length));
         text(1000, position[0] - 15, position[1] - (0.5f * length));
-        text(0, position[0] - 15, position[1] - (0.75f * length));
         text(0, position[0] - 15, position[1] - length);
         
 
@@ -84,8 +83,8 @@ public class Window extends PApplet {
             eig2.add(datas.getEig2());
         }
 
-        int[] minMaxEig1 = getMinMaxInteger(eig1);
-        float[] minMaxEig2 = getMinMaxFloat(eig2);
+        minMaxEig1 = getMinMaxInteger(eig1);
+        minMaxEig2 = getMinMaxFloat(eig2);
 
         ArrayList<DataModel> mapped = new ArrayList();
 
