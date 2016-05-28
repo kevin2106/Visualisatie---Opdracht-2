@@ -51,6 +51,34 @@ public class Window extends PApplet {
 
     public void draw() {
         drawScatterGraph(position, length, width, "Eig1", "Eig2");
+        drawLegend();
+
+        System.out.println(mouseX + " : " + mouseY);
+    }
+
+    public void drawLegend() {
+        stroke(255, 0, 0);
+        fill(255,0,0);
+        text(" = cat 1", 110, 465);
+        ellipse(100, 460, 5, 5);
+
+        stroke(0, 255, 0);
+        fill(0,255,0);
+        text(" = cat 2", 210, 465);
+        ellipse(200, 460, 5, 5);
+
+        stroke(0, 0, 255);
+        fill(0,0,255);
+        text(" = cat 3", 310, 465);
+        ellipse(300, 460, 5, 5);
+
+        stroke(255, 0, 255);
+        fill(255,0,255);
+        text(" = cat 4", 410, 465);
+        ellipse(400, 460, 5, 5);
+        
+        fill(0,0,0);
+        stroke(0,0,0);
     }
 
     private void calcAxis() {
@@ -93,7 +121,6 @@ public class Window extends PApplet {
 
         for (DataModel mapData : mappedData) {
             int cat = mapData.getCat();
-            System.out.println(cat);
             switch (cat) {
                 case 1:
                     stroke(255, 0, 0);
@@ -110,10 +137,9 @@ public class Window extends PApplet {
 
             }
             ellipse(mapData.getEig1(), mapData.getEig2(), 1, 1);
-            
 
         }
-        stroke(0,0,0);
+        stroke(0, 0, 0);
         drawRegressionLine(position, length, width, minMaxEig1, minMaxEig2);
     }
 
@@ -147,18 +173,14 @@ public class Window extends PApplet {
         float b = (temp * -1) + y;
 
         int beginPosY = (int) ((a * minMaxX[0]) + b);
-        //.out.println(beginPosY);
         int temp2 = (int) (minMaxY[0] - b);
         int beginPosX = (int) (temp2 / a);
-        //int beginPosX =  (int) ((a * minMaxY[0]) + b);
 
         int endPosY = (int) ((a * minMaxX[1]) + b);
-        //System.out.println(beginPosY);
         int temp3 = (int) (minMaxY[1] - b);
         int endPosX = (int) (temp3 / a);
 
         int[] regressionValues = {beginPosX, beginPosY, endPosX, endPosY};
-        //System.out.println(regressionValues[0] + " : " + regressionValues[1]);
 
         return regressionValues;
     }
@@ -170,8 +192,6 @@ public class Window extends PApplet {
 
         int mappedEndX = (int) map(regressionValue[2], minMaxEig1[0], minMaxEig1[1], position[0], position[0] + width);
         int mappedEndY = (int) map(regressionValue[3], minMaxEig2[0], minMaxEig2[1], position[1], position[1] - length);
-
-        //System.out.println(mappedBeginX + " : " + mappedBeginY);
 
         line(mappedBeginX, mappedBeginY, mappedEndX, mappedEndY);
     }
